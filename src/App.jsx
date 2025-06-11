@@ -1,36 +1,41 @@
-import { useState } from "react";
-import "./App.css";
+import { useState } from 'react'
+import './App.css'
+import ChildComponent from './chilComp'
+import SiblingComponent from './siblingComp'
 
 function ParentComponent() {
-  const [count, useCount] = useState(0);
-  const handleClick = () => {
-    useCount((prevCount) => prevCount + 1);
-  };
-  const handleClick2 = () => {
-    useCount((prevCount) => {
-      return prevCount > 0 ? prevCount - 1 : 0;
-    });
-  };
-  const defaultCount = () => {
-    useCount(0);
-  };
-  const randomCount = () => {
-    useCount((prevCount) => {
-      const min = 0;
-      const max = 10;
-      return (prevCount = Math.floor(Math.random() * (max - min + 1)) + min);
-    });
-  };
-  return (
-    <div>
-      <button onClick={handleClick}>Увеличить</button>
-      <button onClick={handleClick2}>Уменьшить</button>
-      <br />
-      <button onClick={randomCount}>Случайное значение</button>
-      <p>{count}</p>
-      <button onClick={defaultCount}>Сбросить</button>
-    </div>
-  );
+	const [counter, useCounter] = useState(0)
+	const handleClickUp = () => {
+		useCounter(prevCount => prevCount + 1)
+	}
+	const handleClickDown = () => {
+		useCounter(prevCount => {
+			return prevCount > 0 ? prevCount - 1 : 0
+		})
+	}
+	const defaultCount = () => {
+		useCounter(0)
+	}
+	const randomCount = () => {
+		useCounter(prevCount => {
+			const min = 0
+			const max = 10
+			return (prevCount = Math.floor(Math.random() * (max - min + 1)) + min)
+		})
+	}
+	return (
+		<div>
+			<ChildComponent name={'программист'} counter={counter} />
+			<button onClick={handleClickUp}>Увеличить</button>
+			<button onClick={defaultCount}>Сбросить</button>
+			<button onClick={randomCount}>Случайное значение</button>
+			<button onClick={handleClickDown}>Уменьшить</button>
+
+			<p>{counter}</p>
+
+			<SiblingComponent />
+		</div>
+	)
 }
 
-export default ParentComponent;
+export default ParentComponent
