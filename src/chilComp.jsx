@@ -1,5 +1,3 @@
-
-
 const ChildComponent = props => {
 	return (
 		<h1>
